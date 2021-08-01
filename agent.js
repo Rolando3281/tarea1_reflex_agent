@@ -23,7 +23,7 @@ function test(states){
 
     if(estado4>2 && estado5>2) dirtyAgain(states); //se ensucian nuevamente las habitaciones A o B
 
-  var timer = setTimeout(function(){ test(states); }, 1000);
+  var timer = setTimeout(function(){ test(states); }, 500);
 
   //Si los contadores de cada estado acumulan por lo menos 2 visitas, se detiene la ejecucion del programa
   if(estado1>=2 && estado2>=2 && estado3>=2 && estado4>=2 && estado5>=2 && estado6>=2 && estado7>=2 && estado8>=2){
@@ -38,6 +38,7 @@ function test(states){
 //Funcion para imprimir el valor del contador de cada estado del agente
 function printStates(){
     document.getElementById("logStates").innerHTML="";
+    document.getElementById("logStates").innerHTML+="<br><b>Estado | No.Visitas</b>";
     document.getElementById("logStates").innerHTML+="<br>Estado 1: ".concat(estado1);
     document.getElementById("logStates").innerHTML+="<br>Estado 2: ".concat(estado2);
     document.getElementById("logStates").innerHTML+="<br>Estado 3: ".concat(estado3);
@@ -63,8 +64,9 @@ function statesCount(states){
 
 //Funcion para ensuciar aleatoriamente una habitacion (A, B o Ambas)
 function dirtyAgain(states){
-    
-     aleatorio = Math.floor(Math.random() * (3 - 1 + 1)) + 1; //numero aleatario entre 1 y 3
+    var max = 2;
+    var min = 1;
+     aleatorio = Math.floor(Math.random() * (max - min + 1)) + min; //numero aleatario entre 1 y 3
      //1 ensuciar A
     //2 ensuciar B
     //3 ensuciar A y B
@@ -74,8 +76,8 @@ function dirtyAgain(states){
              break;
          case 2: states[2]="DIRTY";
              break;
-        case 3: //states[1]="DIRTY"; states[2]="DIRTY";
-            break;
+        /*case 3: states[1]="DIRTY"; states[2]="DIRTY";
+            break;*/
      }
 
 return aleatorio;
