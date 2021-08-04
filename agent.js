@@ -13,7 +13,8 @@ function test(states){
        var location = states[0];		
        var state = states[0] == "A" ? states[1] : states[2];
        var action_result = reflex_agent(location, state);
-       document.getElementById("log").innerHTML+="<br>Location: ".concat(location).concat(" | State A: ").concat(states[1]).concat(" | State B: ").concat(states[2]).concat(" | Action: ").concat(action_result);
+       document.getElementById("log").innerHTML+="<br>Location: ".concat(location).concat(" | State A: ").concat(states[1]).concat(" | State B: ").concat(states[2]).concat(" | Action: ")
+                                                                .concat(action_result).concat(" ---->").concat(getCurrentState(states));
        if (action_result == "CLEAN"){
          if (location == "A") states[1] = "CLEAN";
           else if (location == "B") states[2] = "CLEAN";
@@ -28,8 +29,8 @@ function test(states){
   //Si los contadores de cada estado acumulan por lo menos 2 visitas, se detiene la ejecucion del programa
   if(estado1>=2 && estado2>=2 && estado3>=2 && estado4>=2 && estado5>=2 && estado6>=2 && estado7>=2 && estado8>=2){
     clearTimeout(timer);
-    document.getElementById("log").innerHTML+="<br><h3>FINALIZADO!</h3> ";
-    document.getElementById("logStates").innerHTML+="<br><h4>FINALIZADO!</h4> ";
+    document.getElementById("log").innerHTML+="<br><h3>FINALIZADO! Ya se visito al menos 2 veces cada estado...</h3> ";
+    document.getElementById("logStates").innerHTML+="<br><h4>FINALIZADO! Ya se visito al menos 2 veces cada estado...</h4> ";
   } 
   
  
@@ -39,14 +40,14 @@ function test(states){
 function printStates(){
     document.getElementById("logStates").innerHTML="";
     document.getElementById("logStates").innerHTML+="<br><b>Estado | No.Visitas</b>";
-    document.getElementById("logStates").innerHTML+="<br>Estado 1: ".concat(estado1);
-    document.getElementById("logStates").innerHTML+="<br>Estado 2: ".concat(estado2);
-    document.getElementById("logStates").innerHTML+="<br>Estado 3: ".concat(estado3);
-    document.getElementById("logStates").innerHTML+="<br>Estado 4: ".concat(estado4);
-    document.getElementById("logStates").innerHTML+="<br>Estado 5: ".concat(estado5);
-    document.getElementById("logStates").innerHTML+="<br>Estado 6: ".concat(estado6);
-    document.getElementById("logStates").innerHTML+="<br>Estado 7: ".concat(estado7);
-    document.getElementById("logStates").innerHTML+="<br>Estado 8: ".concat(estado8);
+    document.getElementById("logStates").innerHTML+="<br>Estado 1: <b>".concat(estado1).concat("</b>");
+    document.getElementById("logStates").innerHTML+="<br>Estado 2: <b>".concat(estado2).concat("</b>");
+    document.getElementById("logStates").innerHTML+="<br>Estado 3: <b>".concat(estado3).concat("</b>");
+    document.getElementById("logStates").innerHTML+="<br>Estado 4: <b>".concat(estado4).concat("</b>");
+    document.getElementById("logStates").innerHTML+="<br>Estado 5: <b>".concat(estado5).concat("</b>");
+    document.getElementById("logStates").innerHTML+="<br>Estado 6: <b>".concat(estado6).concat("</b>");
+    document.getElementById("logStates").innerHTML+="<br>Estado 7: <b>".concat(estado7).concat("</b>");
+    document.getElementById("logStates").innerHTML+="<br>Estado 8: <b>".concat(estado8).concat("</b>");
     //document.getElementById("logStates").innerHTML+="<br>ALEATORIO : ".concat(aleatorio);
 }    
 
@@ -61,6 +62,17 @@ function statesCount(states){
     else if(states[0]=="B" && states[1]=="DIRTY" && states[2]=="CLEAN" ) estado7++;
     else if(states[0]=="B" && states[1]=="DIRTY" && states[2]=="DIRTY" ) estado8++;
 }    
+
+function getCurrentState(states){
+    if(states[0]=="A" && states[1]=="DIRTY" && states[2]=="DIRTY" ) return "Estoy en Estado 1";
+    else if(states[0]=="A" && states[1]=="CLEAN" && states[2]=="DIRTY" ) return "Estoy en Estado 2";
+    else if(states[0]=="B" && states[1]=="CLEAN" && states[2]=="DIRTY" ) return "Estoy en Estado 3";
+    else if(states[0]=="B" && states[1]=="CLEAN" && states[2]=="CLEAN" ) return "Estoy en Estado 4";
+    else if(states[0]=="A" && states[1]=="CLEAN" && states[2]=="CLEAN" ) return "Estoy en Estado 5";
+    else if(states[0]=="A" && states[1]=="DIRTY" && states[2]=="CLEAN" ) return "Estoy en Estado 6";
+    else if(states[0]=="B" && states[1]=="DIRTY" && states[2]=="CLEAN" ) return "Estoy en Estado 7";
+    else if(states[0]=="B" && states[1]=="DIRTY" && states[2]=="DIRTY" ) return "Estoy en Estado 8";
+}
 
 //Funcion para ensuciar aleatoriamente una habitacion (A, B o Ambas)
 function dirtyAgain(states){
